@@ -1,0 +1,21 @@
+import "Prerequisite.idl";
+
+namespace SuiteInstaller
+{
+    [bindable]
+    [default_interface]
+    runtimeclass InstallModel : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
+    {
+        InstallModel();
+
+        Boolean HaveInstall;
+        Boolean InvInstallInProgress;
+        void    AddPrerequisite(Prerequisite aPrerequiste);
+        void    RemovePrerequisite(Prerequisite aPrerequiste);
+        void    RemoveAllPrerequisites();
+        Windows.Foundation.Collections.IObservableVector<Prerequisite> Prerequisites
+        {
+          get;
+        };
+    }
+}

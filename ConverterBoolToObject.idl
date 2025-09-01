@@ -1,0 +1,21 @@
+namespace SuiteInstaller
+{
+    [bindable]
+    [default_interface]
+    runtimeclass ConverterBoolToObject : Microsoft.UI.Xaml.Data.IValueConverter
+    {
+        ConverterBoolToObject();
+
+        static Microsoft.UI.Xaml.DependencyProperty TrueValueProperty
+        {
+          get;
+        };
+        static Microsoft.UI.Xaml.DependencyProperty FalseValueProperty
+        {
+          get;
+        };
+
+        IInspectable TrueValue;
+        IInspectable FalseValue;
+    }
+}

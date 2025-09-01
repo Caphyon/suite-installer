@@ -1,0 +1,52 @@
+import "Prerequisite.idl";
+import "Update.idl";
+import "InstallModel.idl";
+
+namespace SuiteInstaller
+{
+    [bindable]
+    [default_interface]
+    runtimeclass Context : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
+    {
+        Context();
+
+        String AppName
+        {
+          get;
+        };
+
+        Microsoft.UI.Xaml.Media.Imaging.BitmapImage AppIcon
+        {
+          get;
+          set;
+        };
+
+
+        Int32 PrerequisitesSize{ get; };
+
+
+        Boolean InstallStateLoaded
+        {
+          get;
+        };
+        Boolean UpdatesLoaded { get; };
+        Boolean NewUpdate { get; }; // indicates a new update is available
+
+        Windows.Foundation.Collections.IObservableVector<Prerequisite> Prerequisites{ get; };
+        Windows.Foundation.Collections.IObservableVector<Prerequisite> InstalledPrerequisites{ get; };
+        Windows.Foundation.Collections.IObservableVector<Update> UpdateDescriptions{ get; };
+        Windows.Foundation.Collections.IObservableVector<Update> UpdateFeatures{ get; };
+        Windows.Foundation.Collections.IObservableVector<Update> UpdateEnhancements{ get; };
+        Windows.Foundation.Collections.IObservableVector<Update> UpdateBugfixes{ get; };
+        Windows.Foundation.Collections.IObservableVector<Update> AllUpdates{ get; };
+
+        Windows.Foundation.IAsyncOperation<Boolean> LoadInstalledState();
+        Windows.Foundation.IAsyncOperation<Boolean> LoadUpdates();
+        Windows.Foundation.IAsyncOperation<Boolean> LoadReleaseNotes();
+        Windows.Foundation.IAsyncOperation<Boolean> InstallPackages(Microsoft.UI.Dispatching.DispatcherQueue aDispatcher);
+        Windows.Foundation.Collections.IObservableVector<Prerequisite> GetSearchList(String aQuerry);
+        String HelpLink { get; };
+        String FeedbackLink { get; };
+        void LaunchUpdater(); // launches the updater executable without parameters
+    }
+}

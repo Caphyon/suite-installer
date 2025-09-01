@@ -1,0 +1,11 @@
+namespace SuiteInstaller
+{
+    [bindable]
+    [default_interface]
+    runtimeclass Update 
+    {
+        Update();
+        String Title;
+        String Description;
+    }
+}

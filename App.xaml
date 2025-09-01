@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Application
+  x:Class="SuiteInstaller.App"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:local="using:SuiteInstaller">
+  <Application.Resources>
+    <ResourceDictionary>
+
+
+      <Thickness x:Key="NavigationViewContentGridBorderThickness">0,0,0,0</Thickness>
+
+      <FontFamily x:Key="DefaultFontFamily">Segoe UI Variable</FontFamily>
+      <x:Double x:Key="DefaultFontSize">14</x:Double>
+      <CornerRadius x:Key="DefaultCornerRadius">4</CornerRadius>
+      <Color x:Key="SubtitleTextColor">#636262</Color>
+      <Color x:Key="DisabledTextColor">#A2A2A2</Color>
+
+      <Style TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
+        <Setter Property="FontSize" Value="{StaticResource DefaultFontSize}" />
+      </Style>
+
+      <Style BasedOn="{StaticResource DefaultTextBoxStyle}" TargetType="TextBox">
+        <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
+        <Setter Property="FontSize" Value="{StaticResource DefaultFontSize}" />
+        <Setter Property="CornerRadius" Value="{StaticResource DefaultCornerRadius}" />
+      </Style>
+
+      <Style BasedOn="{StaticResource DefaultAppBarButtonStyle}" TargetType="AppBarButton">
+        <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
+      </Style>
+
+      <Style
+        x:Key="IndentedListViewItemStyle"
+        BasedOn="{StaticResource DefaultListViewItemStyle}"
+        TargetType="ListViewItem">
+        <Setter Property="Margin" Value="0,0,0,5" />
+        <Setter Property="Padding" Value="1" />
+      </Style>
+
+      <Style
+        x:Key="IndentedGridViewItemStyle"
+        BasedOn="{StaticResource DefaultGridViewItemStyle}"
+        TargetType="GridViewItem">
+        <Setter Property="Margin" Value="5,0,0,5" />
+        <Setter Property="Padding" Value="1" />
+      </Style>
+
+      <x:Double x:Key="Breakpoint640Plus">641</x:Double>
+
+      <SolidColorBrush x:Key="IconBrush" Color="{ThemeResource IconColor}" />
+
+      <!--  Theme Dictionaries Start  -->
+      <ResourceDictionary.ThemeDictionaries>
+
+        <!--
+          These two values are "SolidBackgroundFillColorTertiary".
+          We can't just put those here though as
+          StaticResources, because XAML will evaluate their
+          values when the App is first loaded, and we'll
+          always use the value from the OS theme, regardless
+          of the requested theme. Kinda the same thing we've
+          had to do with TabViewBackground in the past.
+        -->
+
+        <ResourceDictionary x:Key="Dark">
+          <Color x:Key="SettingsPageBackground">#202020</Color>
+          <Color x:Key="SettingsPageMicaBackground">#00000000</Color>
+          <Color x:Key="IconColor">#fff3f3f3</Color>
+        </ResourceDictionary>
+
+        <ResourceDictionary x:Key="Light">
+          <Color x:Key="SettingsPageBackground">#f3f3f3</Color>
+          <Color x:Key="SettingsPageMicaBackground">#00000000</Color>
+          <Color x:Key="IconColor">#ff202020</Color>
+        </ResourceDictionary>
+
+        <ResourceDictionary x:Key="HighContrast">
+          <!--  Define resources for HighContrast mode here  -->
+          <StaticResource x:Key="SettingsPageBackground" ResourceKey="SystemColorWindowColorBrush" />
+          <StaticResource x:Key="SettingsPageMicaBackground" ResourceKey="SystemColorWindowColorBrush" />
+        </ResourceDictionary>
+
+      </ResourceDictionary.ThemeDictionaries>
+      <!--  Theme Dictionaries End  -->
+
+
+      <ResourceDictionary.MergedDictionaries>
+        <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+
+        <ResourceDictionary>
+          <Visibility x:Key="Visible">Visible</Visibility>
+          <Visibility x:Key="Collapse">Collapsed</Visibility>
+
+          <local:ConverterBoolToObject
+            x:Key="BoolToVisibilityConv"
+            FalseValue="{StaticResource Collapse}"
+            TrueValue="{StaticResource Visible}" />
+          <local:ConverterBoolToObject
+            x:Key="BoolInvToVisibilityConv"
+            FalseValue="{StaticResource Visible}"
+            TrueValue="{StaticResource Collapse}" />
+
+
+          <Style x:Key="CustomButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#29f7ff" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="CornerRadius" Value="5" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="Width" Value="150" />
+            <Setter Property="Template">
+              <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                  <Border
+                    x:Name="border"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="{TemplateBinding CornerRadius}">
+                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <VisualStateManager.VisualStateGroups>
+                      <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="PointerOver">
+                          <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="border" Storyboard.TargetProperty="Background">
+                              <DiscreteObjectKeyFrame KeyTime="0" Value="#29d3ff" />
+                            </ObjectAnimationUsingKeyFrames>
+                          </Storyboard>
+                        </VisualState>
+                        <VisualState x:Name="Pressed">
+                          <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="border" Storyboard.TargetProperty="Background">
+                              <DiscreteObjectKeyFrame KeyTime="0" Value="#29bfff" />
+                            </ObjectAnimationUsingKeyFrames>
+                          </Storyboard>
+                        </VisualState>
+                      </VisualStateGroup>
+                    </VisualStateManager.VisualStateGroups>
+                  </Border>
+                </ControlTemplate>
+              </Setter.Value>
+            </Setter>
+          </Style>
+
+        </ResourceDictionary>
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </Application.Resources>
+</Application>

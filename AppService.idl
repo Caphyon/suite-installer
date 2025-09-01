@@ -1,0 +1,16 @@
+import "Context.idl";
+import "InstallModel.idl";
+
+namespace SuiteInstaller
+{
+    [default_interface]
+    runtimeclass AppService : Microsoft.UI.Xaml.Controls.Control
+    {
+        AppService();
+
+        static AppService GetInstance();
+
+        Context RuntimeContext{ get; };
+        InstallModel InstallingPrereqs{ get; };
+    }
+}

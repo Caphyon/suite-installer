@@ -1,0 +1,8 @@
+namespace SuiteInstaller
+{
+    [default_interface]
+    runtimeclass InstallPane : Microsoft.UI.Xaml.Controls.UserControl
+    {
+        InstallPane();
+    }
+}

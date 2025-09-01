@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Midl Include="App.idl" />
+    <Midl Include="MainWindow.idl" />
+    <Midl Include="Moon.idl">
+      <Filter>src\ui\icons</Filter>
+    </Midl>
+    <Midl Include="LibraryIcon.idl">
+      <Filter>src\ui\icons</Filter>
+    </Midl>
+    <Midl Include="HomeIcon.idl">
+      <Filter>src\ui\icons</Filter>
+    </Midl>
+    <Midl Include="Update.idl">
+      <Filter>src\ui\models</Filter>
+    </Midl>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <Filter>win</Filter>
+    </ClCompile>
+    <ClCompile Include="Context.cpp">
+      <Filter>src\ui\models</Filter>
+    </ClCompile>
+    <ClCompile Include="Prerequisite.cpp">
+      <Filter>src\ui\models</Filter>
+    </ClCompile>
+    <ClCompile Include="AppService.cpp">
+      <Filter>src\ui\models</Filter>
+    </ClCompile>
+    <ClCompile Include="InstallModel.cpp">
+      <Filter>src\ui\models</Filter>
+    </ClCompile>
+    <ClCompile Include="ConverterBoolToObject.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="Moon.cpp">
+      <Filter>src\ui\icons</Filter>
+    </ClCompile>
+    <ClCompile Include="LibraryIcon.cpp">
+      <Filter>src\ui\icons</Filter>
+    </ClCompile>
+    <ClCompile Include="HomeIcon.cpp">
+      <Filter>src\ui\icons</Filter>
+    </ClCompile>
+    <ClCompile Include="util\Utils.cpp">
+      <Filter>src\util</Filter>
+    </ClCompile>
+    <ClCompile Include="util\HandleStream.cpp">
+      <Filter>src\util</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="assets">
+      <UniqueIdentifier>{d7abb872-1059-4f06-b1e5-1922eece0496}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{8df7b3c2-3696-4fbd-b19b-0d249fe8cb6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="win">
+      <UniqueIdentifier>{e8f4dd89-6b67-42f2-a5d7-8d9dbb6d0e88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ui">
+      <UniqueIdentifier>{586cb90b-a1df-4e64-a0f2-ed9997edc7a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external">
+      <UniqueIdentifier>{69e643bb-7a36-42ff-bf1f-bd226149b0c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ui\pages">
+      <UniqueIdentifier>{12ba4baa-372a-4b42-b8a6-e20c30bf9951}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ui\models">
+      <UniqueIdentifier>{8aa413be-d1c1-44a8-951c-0f198142d724}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ui\icons">
+      <UniqueIdentifier>{d230fc57-0d4a-489a-9962-17cf33fa02b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ui\controls">
+      <UniqueIdentifier>{4ccbdafd-3616-445a-8ea0-e44cf586b635}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\util">
+      <UniqueIdentifier>{f0527a70-9384-47fa-8d18-7ebd31d40a4c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Moon.json">
+      <Filter>src\ui\icons</Filter>
+    </None>
+    <None Include="homeIcon.json">
+      <Filter>src\ui\icons</Filter>
+    </None>
+    <None Include="libraryIcon.json">
+      <Filter>src\ui\icons</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>win</Filter>
+    </ClInclude>
+    <ClInclude Include="Moon.h">
+      <Filter>src\ui\icons</Filter>
+    </ClInclude>
+    <ClInclude Include="LibraryIcon.h">
+      <Filter>src\ui\icons</Filter>
+    </ClInclude>
+    <ClInclude Include="HomeIcon.h">
+      <Filter>src\ui\icons</Filter>
+    </ClInclude>
+    <ClInclude Include="util\Utils.h">
+      <Filter>src\util</Filter>
+    </ClInclude>
+    <ClInclude Include="util\HandleStream.h">
+      <Filter>src\util</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="MainWindow.xaml">
+      <Filter>src\ui</Filter>
+    </Page>
+    <Page Include="HomePage.xaml">
+      <Filter>src\ui\pages</Filter>
+    </Page>
+    <Page Include="LibraryPage.xaml">
+      <Filter>src\ui\pages</Filter>
+    </Page>
+    <Page Include="themes\Generic.xaml" />
+    <Page Include="PrerequisitePage.xaml">
+      <Filter>src\ui\pages</Filter>
+    </Page>
+    <Page Include="InstallPane.xaml">
+      <Filter>src\ui\controls</Filter>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="app.manifest">
+      <Filter>src</Filter>
+    </Manifest>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Filter>src\ui</Filter>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\test1.jpg">
+      <Filter>assets</Filter>
+    </Image>
+    <Image Include="assets\test2.jpg">
+      <Filter>assets</Filter>
+    </Image>
+    <Image Include="assets\test3.jpg">
+      <Filter>assets</Filter>
+    </Image>
+    <Image Include="assets\test4.jpg">
+      <Filter>assets</Filter>
+    </Image>
+    <Image Include="assets\test5.jpg">
+      <Filter>assets</Filter>
+    </Image>
+    <Image Include="assets\test6.jpg">
+      <Filter>assets</Filter>
+    </Image>
+    <Image Include="assets\ai.png">
+      <Filter>assets</Filter>
+    </Image>
+    <Image Include="assets\ai2.png">
+      <Filter>assets</Filter>
+    </Image>
+    <Image Include="assets\ai1.png">
+      <Filter>assets</Filter>
+    </Image>
+    <Image Include="assets\ai3.png">
+      <Filter>assets</Filter>
+    </Image>
+    <Image Include="assets\sourcetree1.png">
+      <Filter>assets</Filter>
+    </Image>
+    <Image Include="assets\sourcetreeIco.png">
+      <Filter>assets</Filter>
+    </Image>
+    <Image Include="assets\fork1.jpg">
+      <Filter>assets</Filter>
+    </Image>
+    <Image Include="assets\forkIco.png">
+      <Filter>assets</Filter>
+    </Image>
+    <Image Include="assets\git1.png">
+      <Filter>assets</Filter>
+    </Image>
+    <Image Include="assets\gitIco.png">
+      <Filter>assets</Filter>
+    </Image>
+    <Image Include="assets\StoreLogo.png">
+      <Filter>assets</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

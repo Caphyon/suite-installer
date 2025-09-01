@@ -1,0 +1,16 @@
+import "InstallModel.idl";
+import "Context.idl";
+
+
+namespace SuiteInstaller
+{
+    [default_interface]
+    runtimeclass MainWindow : Microsoft.UI.Xaml.Window
+    {
+        MainWindow();
+
+        InstallModel GetInstallingPrereqModel { get; };
+
+        Context Context { get; };
+    }
+}

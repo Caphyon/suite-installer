@@ -1,0 +1,11 @@
+import "Prerequisite.idl";
+
+namespace SuiteInstaller
+{
+    [default_interface]
+    runtimeclass HomePage : Microsoft.UI.Xaml.Controls.Page
+    {
+        HomePage();
+
+        Microsoft.UI.Xaml.Controls.FlipView HomeFlipView{ get; };    }
+}

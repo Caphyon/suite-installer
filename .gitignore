@@ -1,0 +1,7 @@
+﻿.vs
+packages/
+Debug/
+Generated Files/
+x64/
+Win32/
+Release/

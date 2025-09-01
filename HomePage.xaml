@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page
+  x:Class="SuiteInstaller.HomePage"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:local="using:SuiteInstaller"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  mc:Ignorable="d">
+
+  <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <Grid>
+      <Grid Margin="50,0,50,0" Visibility="{Binding PrerequisitesSize, Converter={StaticResource BoolInvToVisibilityConv}}">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="600" />
+          <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="HeaderGrid" CornerRadius="10">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+          </Grid.RowDefinitions>
+
+          <FlipView
+            x:Name="HomeFlipView"
+            Background="Transparent"
+            FlowDirection="LeftToRight"
+            ItemsSource="{Binding Prerequisites, Mode=OneWay}">
+
+            <FlipView.ItemsPanel>
+              <ItemsPanelTemplate>
+                <VirtualizingStackPanel Orientation="Horizontal" />
+              </ItemsPanelTemplate>
+            </FlipView.ItemsPanel>
+
+            <FlipView.ItemTemplate>
+              <DataTemplate x:DataType="local:Prerequisite">
+                <Grid
+                  x:Name="CarouselGrid"
+                  Height="536"
+                  Margin="10"
+                  Background="Transparent"
+                  CornerRadius="10">
+                  <!--  The background image  -->
+                  <Image
+                    x:Name="ConnectedImage"
+                    Grid.ColumnSpan="2"
+                    IsHitTestVisible="False"
+                    Source="{x:Bind CarouselImage}"
+                    Stretch="UniformToFill" />
+
+                  <!--  Gradient overlay for better contrast  -->
+                  <Rectangle>
+                    <Rectangle.Fill>
+                      <LinearGradientBrush StartPoint="0,1" EndPoint="1,1">
+                        <GradientStop Offset="0" Color="#AA000000" />
+                        <GradientStop Offset="0.5" Color="Transparent" />
+                      </LinearGradientBrush>
+                    </Rectangle.Fill>
+                  </Rectangle>
+
+                  <!--  Text content  -->
+                  <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                    <Border Padding="8" Background="Transparent">
+                      <StackPanel Margin="10">
+                        <TextBlock
+                          x:Name="ConnectedTitle"
+                          Margin="0,0,0,5"
+                          FontSize="20"
+                          Foreground="White"
+                          MaxLines="2"
+                          Text="{x:Bind Title}"
+                          TextTrimming="WordEllipsis"
+                          TextWrapping="Wrap" />
+                        <TextBlock
+                          MaxWidth="400"
+                          HorizontalAlignment="Left"
+                          Foreground="White"
+                          MaxLines="2"
+                          Text="{x:Bind Description}"
+                          TextTrimming="WordEllipsis"
+                          TextWrapping="Wrap" />
+                      </StackPanel>
+                    </Border>
+                  </StackPanel>
+                </Grid>
+              </DataTemplate>
+            </FlipView.ItemTemplate>
+          </FlipView>
+
+          <TextBlock
+            x:Name="smallHeaderText"
+            Margin="36"
+            VerticalAlignment="Top"
+            FontSize="40"
+            Foreground="White"
+            Text="Home" />
+
+          <PipsPager
+            x:Name="FlipViewPipsPager"
+            Grid.Row="1"
+            HorizontalAlignment="Center"
+            NumberOfPages="{Binding PrerequisitesSize}"
+            SelectedPageIndex="{Binding ElementName=HomeFlipView, Path=SelectedIndex, Mode=TwoWay}" />
+        </Grid>
+
+        <GridView
+          x:Name="ConnectedGridView"
+          Grid.Row="1"
+          Padding="24,36,24,36"
+          IsItemClickEnabled="True"
+          ItemClick="GridViewItem_Clicked"
+          ItemsSource="{Binding Prerequisites, Mode=OneWay}">
+          <GridView.ItemTemplate>
+            <DataTemplate x:DataType="local:Prerequisite">
+              <StackPanel
+                Width="350"
+                Height="90"
+                Padding="12"
+                AutomationProperties.Name="{x:Bind Title}"
+                Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                Orientation="Horizontal">
+
+                <Grid Width="90" CornerRadius="{ThemeResource ControlCornerRadius}">
+                  <Image
+                    x:Name="ConnectedIcon"
+                    Width="90"
+                    VerticalAlignment="Center"
+                    AutomationProperties.Name="{x:Bind Title}"
+                    Source="{x:Bind Icon}"
+                    Stretch="Uniform" />
+                </Grid>
+                <StackPanel
+                  Grid.Column="1"
+                  Grid.ColumnSpan="2"
+                  MaxWidth="240"
+                  Margin="15,0,0,0"
+                  VerticalAlignment="Center"
+                  Orientation="Vertical"
+                  Spacing="2">
+                  <TextBlock
+                    x:Name="ConnectedTitle"
+                    MaxWidth="230"
+                    LineHeight="20"
+                    Style="{StaticResource BodyStrongTextBlockStyle}"
+                    Text="{x:Bind Title}"
+                    TextLineBounds="TrimToCapHeight"
+                    TextWrapping="Wrap" />
+                  <TextBlock
+                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                    RelativePanel.Below="titleText"
+                    Style="{StaticResource CaptionTextBlockStyle}"
+                    Text="{x:Bind Description}"
+                    TextTrimming="CharacterEllipsis" />
+                </StackPanel>
+              </StackPanel>
+            </DataTemplate>
+          </GridView.ItemTemplate>
+          <GridView.ItemsPanel>
+            <ItemsPanelTemplate>
+              <ItemsWrapGrid
+                HorizontalAlignment="Center"
+                MaximumRowsOrColumns="4"
+                Orientation="Horizontal" />
+            </ItemsPanelTemplate>
+          </GridView.ItemsPanel>
+        </GridView>
+
+        <VisualStateManager.VisualStateGroups>
+          <!--  Visual states reflect the application's window size  -->
+          <VisualStateGroup x:Name="LayoutVisualStates">
+            <VisualState x:Name="NarrowLayout">
+              <VisualState.StateTriggers>
+                <AdaptiveTrigger MinWindowWidth="0" />
+              </VisualState.StateTriggers>
+              <VisualState.Setters>
+                <Setter Target="HeaderGrid.Height" Value="436" />
+                <Setter Target="itemGridView.Padding" Value="16,16,16,36" />
+              </VisualState.Setters>
+            </VisualState>
+          </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+      </Grid>
+
+      <Border
+        Padding="20"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+        CornerRadius="10"
+        Visibility="{Binding PrerequisitesSize, Converter={StaticResource BoolToVisibilityConv}}">
+        <StackPanel
+          HorizontalAlignment="Center"
+          VerticalAlignment="Center"
+          Spacing="12">
+          <SymbolIcon
+            Width="60"
+            Height="60"
+            Foreground="Gray"
+            Symbol="Library" />
+          <TextBlock
+            FontSize="28"
+            FontWeight="SemiBold"
+            Text="No apps available for installation"
+            TextAlignment="Center" />
+          <TextBlock
+            FontSize="18"
+            Text="Check your library for installed apps"
+            TextAlignment="Center" />
+        </StackPanel>
+      </Border>
+    </Grid>
+  </ScrollViewer>
+</Page>

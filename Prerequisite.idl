@@ -1,0 +1,54 @@
+namespace SuiteInstaller
+{
+    [bindable]
+    [default_interface] runtimeclass Prerequisite : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
+    {
+        Prerequisite(String aId,String aTitle,String aDescription, String aPublisher, String aCategory, 
+          String aAdditionalInformation,Boolean aInstalled, Microsoft.UI.Xaml.Media.Imaging.BitmapImage aIcon, 
+          Windows.Foundation.Collections.IObservableVector <Microsoft.UI.Xaml.Media.Imaging.BitmapImage> aImages);
+
+        String Id{ get; };
+        String Title{ get; };
+        String Description{ get; };
+        String Publisher{ get; };
+        String Category{ get; };
+        String AdditionalTerms{ get; };
+
+        Boolean Installed
+        {
+          get;
+          set;
+        };
+
+        String OpenPath{ get; set; };
+        Boolean HasOpenPath{ get; set; };
+        String CurrentAction{ get; set; };
+        Int32 ProgressValue{ get; set; };
+        Int32 TotalRange{ get; set; };
+
+
+        Boolean InstallInProgress
+        {
+          get;
+          set;
+        };
+
+        Boolean DownloadInProgress
+        {
+          get;
+          set;
+        };
+
+        Boolean WaitingForInstall
+        {
+          get;
+          set;
+        };
+
+        Boolean ShowRemoveBtn;
+
+        Microsoft.UI.Xaml.Media.Imaging.BitmapImage CarouselImage{get;};
+        Microsoft.UI.Xaml.Media.Imaging.BitmapImage Icon{ get; };
+        Windows.Foundation.Collections.IObservableVector <Microsoft.UI.Xaml.Media.Imaging.BitmapImage> Images { get; };
+    }
+}

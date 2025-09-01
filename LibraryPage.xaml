@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page
+  x:Class="SuiteInstaller.LibraryPage"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:local="using:SuiteInstaller"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  mc:Ignorable="d">
+
+  <!--  This grid acts as a root panel for the page.  -->
+  <ScrollView>
+    <Grid Margin="36">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="*" />
+      </Grid.RowDefinitions>
+
+      <Grid
+        x:Name="HeaderGrid"
+        Grid.Row="0"
+        MinHeight="100"
+        CornerRadius="8,0,0,0">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="60" />
+          <RowDefinition Height="40" />
+        </Grid.RowDefinitions>
+        <TextBlock
+          x:Name="smallHeaderText"
+          Grid.Row="0"
+          VerticalAlignment="Center"
+          FontSize="30"
+          Text="Library" />
+        <TextBlock
+          Grid.Row="1"
+          Margin="0,10,0,0"
+          VerticalAlignment="Center"
+          FontSize="25"
+          Text="Updates &amp; Downloads" />
+      </Grid>
+
+      <!--  Installed prereq view  -->
+      <ListView
+        x:Name="InstalledPrerequisiteList"
+        Grid.Row="1"
+        Padding="0,36,24,36"
+        IsItemClickEnabled="True"
+        IsSwipeEnabled="False"
+        ItemClick="InstalledPrerequisite_Clicked"
+        ItemContainerStyle="{StaticResource IndentedListViewItemStyle}"
+        ItemsSource="{Binding InstalledPrerequisites, Mode=OneWay}"
+        SelectionMode="None">
+        <ListView.ItemTemplate>
+          <DataTemplate x:DataType="local:Prerequisite">
+            <Grid
+              x:Name="ConnectedGrid"
+              Height="90"
+              Padding="8"
+              HorizontalAlignment="Stretch"
+              Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+              BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+              BorderThickness="1"
+              CornerRadius="{StaticResource ControlCornerRadius}">
+
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+              </Grid.ColumnDefinitions>
+
+              <Grid Width="100" CornerRadius="{ThemeResource ControlCornerRadius}">
+                <Image
+                  x:Name="ConnectedIcon"
+                  Width="90"
+                  VerticalAlignment="Center"
+                  Source="{x:Bind Icon}"
+                  Stretch="Uniform" />
+              </Grid>
+              <StackPanel
+                Grid.Column="1"
+                Grid.ColumnSpan="2"
+                Margin="10,0,0,0"
+                VerticalAlignment="Center"
+                Orientation="Vertical"
+                Spacing="2">
+                <TextBlock
+                  x:Name="ConnectedTitle"
+                  Height="20"
+                  FontSize="16"
+                  Style="{StaticResource BodyStrongTextBlockStyle}"
+                  Text="{x:Bind Title}"
+                  TextWrapping="NoWrap" />
+                <TextBlock
+                  MaxHeight="40"
+                  Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                  RelativePanel.Below="titleText"
+                  Style="{StaticResource CaptionTextBlockStyle}"
+                  Text="{x:Bind Description}"
+                  TextWrapping="WrapWholeWords" />
+              </StackPanel>
+
+              <Grid
+                Grid.Column="3"
+                Margin="16,0,0,0"
+                VerticalAlignment="Center">
+                <Button
+                  Name="InstallButton"
+                  Width="100"
+                  Height="30"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Bottom"
+                  Click="InstallButton_Click"
+                  Content="Add"
+                  Style="{StaticResource CustomButtonStyle}"
+                  Visibility="{Binding WaitingForInstall, Mode=TwoWay, Converter={StaticResource BoolInvToVisibilityConv}}" />
+                <Button
+                  Name="OpenButton"
+                  Width="100"
+                  Height="30"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Bottom"
+                  Click="OpenButton_Click"
+                  Content="Open"
+                  Style="{StaticResource CustomButtonStyle}"
+                  Visibility="{Binding HasOpenPath, Mode=TwoWay, Converter={StaticResource BoolToVisibilityConv}}" />
+              </Grid>
+
+              <!--<StackPanel
+                Grid.Column="4"
+                Margin="12,0,0,0"
+                VerticalAlignment="Center"
+                Orientation="Vertical"
+                Spacing="2">
+                <Button Background="Transparent" BorderThickness="0">
+                  <FontIcon Glyph="&#xE712;" />
+                </Button>
+              </StackPanel>-->
+            </Grid>
+          </DataTemplate>
+        </ListView.ItemTemplate>
+      </ListView>
+
+      <!--  Installed prerequisite view  -->
+      <ListView
+        x:Name="PrerequisiteList"
+        Grid.Row="2"
+        Padding="0,20,24,20"
+        IsItemClickEnabled="True"
+        IsSwipeEnabled="False"
+        ItemClick="Prerequisite_Clicked"
+        ItemContainerStyle="{StaticResource IndentedListViewItemStyle}"
+        ItemsSource="{Binding Prerequisites, Mode=OneWay}"
+        SelectionMode="None">
+        <ListView.ItemTemplate>
+          <DataTemplate x:DataType="local:Prerequisite">
+            <Grid
+              x:Name="ConnectedGrid"
+              Height="90"
+              Padding="8"
+              HorizontalAlignment="Stretch"
+              Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+              BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+              BorderThickness="1"
+              CornerRadius="{StaticResource ControlCornerRadius}">
+
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+              </Grid.ColumnDefinitions>
+
+              <Grid Width="100" CornerRadius="{ThemeResource ControlCornerRadius}">
+                <Image
+                  x:Name="ConnectedIcon"
+                  Width="90"
+                  VerticalAlignment="Center"
+                  Source="{x:Bind Icon}"
+                  Stretch="Uniform" />
+              </Grid>
+              <StackPanel
+                Grid.Column="1"
+                Grid.ColumnSpan="2"
+                Margin="10,0,0,0"
+                VerticalAlignment="Center"
+                Orientation="Vertical"
+                Spacing="2">
+                <TextBlock
+                  x:Name="ConnectedTitle"
+                  Height="20"
+                  FontSize="16"
+                  Style="{StaticResource BodyStrongTextBlockStyle}"
+                  Text="{x:Bind Title}"
+                  TextWrapping="NoWrap" />
+                <TextBlock
+                  MaxHeight="40"
+                  Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                  RelativePanel.Below="titleText"
+                  Style="{StaticResource CaptionTextBlockStyle}"
+                  Text="{x:Bind Description}"
+                  TextWrapping="WrapWholeWords" />
+              </StackPanel>
+
+              <Grid
+                Grid.Column="3"
+                Margin="16,0,0,0"
+                VerticalAlignment="Center">
+                <Button
+                  Name="InstallButton"
+                  Width="100"
+                  Height="30"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Bottom"
+                  Click="InstallButton_Click"
+                  Content="Add"
+                  Style="{StaticResource CustomButtonStyle}"
+                  Visibility="{Binding WaitingForInstall, Mode=TwoWay, Converter={StaticResource BoolInvToVisibilityConv}}" />
+                <Button
+                  Name="OpenButton"
+                  Width="100"
+                  Height="30"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Bottom"
+                  Click="OpenButton_Click"
+                  Content="Open"
+                  Style="{StaticResource CustomButtonStyle}"
+                  Visibility="{Binding HasOpenPath, Mode=TwoWay, Converter={StaticResource BoolToVisibilityConv}}" />
+              </Grid>
+
+              <!--<StackPanel
+                Grid.Column="4"
+                Margin="12,0,0,0"
+                VerticalAlignment="Center"
+                Orientation="Vertical"
+                Spacing="2">
+                <Button Background="Transparent" BorderThickness="0">
+                  <FontIcon Glyph="&#xE712;" />
+                </Button>
+              </StackPanel>-->
+
+              <!--<InfoBadge
+                    Grid.Column="2"
+                    Width="10"
+                    Margin="4"
+                    VerticalAlignment="Top"
+                    Style="{StaticResource AttentionIconInfoBadgeStyle}"
+                    Visibility="{x:Bind BadgeString, Converter={StaticResource nullToVisibilityConverter}}" />-->
+            </Grid>
+          </DataTemplate>
+        </ListView.ItemTemplate>
+      </ListView>
+    </Grid>
+  </ScrollView>
+</Page>

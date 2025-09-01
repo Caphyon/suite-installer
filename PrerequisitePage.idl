@@ -1,0 +1,8 @@
+namespace SuiteInstaller
+{
+    [default_interface]
+    runtimeclass PrerequisitePage : Microsoft.UI.Xaml.Controls.Page
+    {
+        PrerequisitePage();
+    }
+}
